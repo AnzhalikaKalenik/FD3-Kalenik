@@ -1,0 +1,33 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta charset="utf-8" />
+  <title>ishop</title>
+</head> 
+<body> 
+  <div id="container"></div> 
+      
+  <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
+      
+  <script src="ishop.js"></script>
+  <link rel="stylesheet" type="text/css" href="ishop.css" />
+
+  <script>
+
+    var productsListArr=[ 
+      {product:'платье',code:1, price:100, photo: 'img/dress.png', balance:17}, 
+      {product:'шорты',code:2, price:80, photo: 'img/shorts.jpg', balance:12}, 
+      {product:'брюки',code:3, price:90, photo: 'img/pants.jpg', balance:23},
+      {product:'жакет',code:4, price:120, photo: 'img/jacket.jpg', balance:18}
+    ];
+    
+    ReactDOM.render(
+      React.createElement(Ishop,{productsList:productsListArr}), 
+      document.getElementById('container') 
+    );
+
+  </script>
+
+</body> 
+</html>
