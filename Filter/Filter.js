@@ -2,22 +2,22 @@ var Filter = React.createClass ({
 
     displayName: 'Filter',
 
-    propTypes: { //через propTypes задаем типы пропсов
-        listWords: React.PropTypes.array.isRequired, //задаем тип пропсов - массив и его нельзя не передать
-        // listWords: React.PropTypes.arrayOff( //задаем тип пропсов - массив и его нельзя не передать
-        //     React.PropTypes.shape({
-        //         code: React.PropTypes.number.isRequired,
-        //         word: React.PropTypes.string.isRequired,
-        //         //freeanswer: React.PropTypes.bool,
-        //     })
-        // ) 
+    propTypes: { 
+        // listWords: React.PropTypes.array.isRequired, //задаем тип пропсов - массив и его нельзя не передать
+        listWords: React.PropTypes.arrayOff( 
+            React.PropTypes.shape({
+                code: React.PropTypes.number.isRequired,
+                word: React.PropTypes.string.isRequired,
+               
+            })
+        ) 
     },
 
     getInitialState: function() {
         return { 
           sort: false,
           filter:'',
-          currentWords:this.props.fullWords,
+          currentWords:this.props.listWords,
         };
     },
 
@@ -34,7 +34,7 @@ var Filter = React.createClass ({
     },
 
     processWords: function(){
-        let words=this.props.fullWords.slice();
+        let words=this.props.listWords.slice();
         if(this.state.filter)
             words=words.filter(
                 // функция фильтрации  
