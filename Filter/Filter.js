@@ -3,12 +3,10 @@ var Filter = React.createClass ({
     displayName: 'Filter',
 
     propTypes: { 
-        // listWords: React.PropTypes.array.isRequired, //задаем тип пропсов - массив и его нельзя не передать
-        listWords: React.PropTypes.arrayOff( 
+        listWords: React.PropTypes.arrayOf( 
             React.PropTypes.shape({
-                code: React.PropTypes.number.isRequired,
                 word: React.PropTypes.string.isRequired,
-               
+                code: React.PropTypes.number.isRequired,
             })
         ) 
     },
@@ -21,33 +19,39 @@ var Filter = React.createClass ({
         };
     },
 
-    sortChanged: function(eo){
-        this.setState({sort:eo.target.checked},this.processWords);
+    sortChanged: function(EO){
+        this.setState({sort:EO.target.checked},this.processWords);
     },
 
-    filterChanged: function(eo){
-        this.setState({filter:eo.target.value},this.processWords);
+    filterChanged: function(EO){
+        this.setState({filter:EO.target.value},this.processWords);
     },
 
-    clearAll: function(eo){
-        this.setState({sort:false,filter:""},this.processWords);
+    clearAll: function(EO){
+        this.setState({sort:EO.false,filter:""},this.processWords);
     },
 
     processWords: function(){
-        let words=this.props.listWords.slice();
-        if(this.state.filter)
+        
+        let words=this.props.listWords.slice(); //slice-поверхностная копия
+
+        if (this.state.filter)
             words=words.filter(
                 // функция фильтрации  
-              function filterArrayOfWords(queru){
-                return arrayOfWords.filter(function(el){
-                    return el.toLowerCase().indexOf(queru.toLowerCase())>-1;
+                function filterArrayListWords (say){
+                return words.filter(function(el){
+                    return el.toString().toLowerCase().indexOf(say.toString().toLowerCase())>-1;
                 })
               }
             )
-            if (this.state.sort)
+        
+
+        if (this.state.sort){
             words.sort();
+        }
 
         this.state({currentWords:words});
+
     },
 
     render(){
@@ -62,7 +66,6 @@ var Filter = React.createClass ({
                 React.DOM.input({type:'text',value:this.state.filter, onChange:this.filterChanged}),
                 React.DOM.input({type:'button',value:'сброс', onChange:this.clearAll}),
                 React.DOM.span({className:'Word'},this.props.word),
-                //React.DOM.span({className:'Code'},this.props.code),
             );
             listWordsCode.push(listWordCode);
         
