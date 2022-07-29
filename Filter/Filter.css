@@ -1,0 +1,7 @@
+.Filter .CurrentWord{
+    margin-left: 20px;
+    padding-left: 20px;
+    margin-top: 10px;
+    width: 150px;
+    border: 1px solid black;
+}

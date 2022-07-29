@@ -34,46 +34,46 @@ var Filter = React.createClass ({
     processWords: function(){
         
         let words=this.props.listWords.slice(); //slice-поверхностная копия
-
-        if (this.state.filter)
-            words=words.filter(
-                // функция фильтрации  
-                function filterArrayListWords (say){
-                return words.filter(function(el){
-                    return el.toString().toLowerCase().indexOf(say.toString().toLowerCase())>-1;
-                })
-              }
-            )
         
+        if (this.state.filter){
+            words=words.filter( //аргументом методу filter передаю функцию
+                // функция фильтрации  
+                filterArrayListWords = (word) =>{ //она получает слово и возвращает true если в данном слове есть подстрока из this.state.filter
+                    if (this.state.filter.indexOf(word.toString().toLowerCase()) !== -1){// true
+                        return words;
+                    }
+                }
+
+                // function filterArrayListWords (word){  //она получает слово и возвращает true если в данном слове есть подстрока из this.state.filter                     
+                //     if (this.state.filter.indexOf(word.toLowerCase()) !== -1){// true
+                //         return words;
+                //     }
+                // }
+            )
+        }    
 
         if (this.state.sort){
             words.sort();
         }
 
-        this.state({currentWords:words});
+        this.setState({currentWords:words});
 
     },
 
     render(){
-        this.state.currentWords;
+      
+        var currentWordsCode=this.state.currentWords.map( v =>
+            React.DOM.div({key:v.code, className:'Word'},v.word),
+          );
 
-        var listWordsCode=[];
-        for ( var a=0; a<this.props.listWords.length; a++ ) {//проходим циклом повсем вариантам списка товаров
-            var listWord=this.props.listWords[a];
-            var listWordCode=
-              React.DOM.div({key:listWord.code,className:'listWord'},// у каждого элемента массива должен быть свой уникальный кеу
-                React.DOM.input({type:'checkbox',checked:this.state.sort, onClick:this.sortChanged}),
-                React.DOM.input({type:'text',value:this.state.filter, onChange:this.filterChanged}),
-                React.DOM.input({type:'button',value:'сброс', onChange:this.clearAll}),
-                React.DOM.span({className:'Word'},this.props.word),
-            );
-            listWordsCode.push(listWordCode);
+        return React.DOM.div({className:'Filter'},
+
+            React.DOM.input({type:'checkbox',checked:this.state.sort, onClick:this.sortChanged}),
+            React.DOM.input({type:'text',value:this.state.filter, onChange:this.filterChanged}),
+            React.DOM.input({type:'button',value:'сброс', onChange:this.clearAll}),
         
-
-
-        return React.DOM.div({className: 'Filter'},
-            React.DOM.div({className:'listWordsCode'}, listWordsCode),
+            React.DOM.div({className:'CurrentWord'}, currentWordsCode),
         );
-      }
+      
     }
 })
