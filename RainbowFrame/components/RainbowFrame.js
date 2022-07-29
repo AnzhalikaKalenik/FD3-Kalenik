@@ -6,8 +6,8 @@ import './RainbowFrame.css';
 // import VotesQuestion from './VotesQuestion';
 // import VotesAnswer from './VotesAnswer';
 
-// import colorsArr from './colors.json';
-var colors = require('./colors.json');
+// import colorsArr from '../colors.json';
+var colors= require('../colors.json');
 
 class RainbowFrame extends React.Component {
 
