@@ -6,14 +6,19 @@ import './RainbowFrame.css';
 // import VotesQuestion from './VotesQuestion';
 // import VotesAnswer from './VotesAnswer';
 
-// import colorsArr from '../colors.json';
+// import colors from '../colors.json';
 var colors= require('../colors.json');
 
 class RainbowFrame extends React.Component {
 
-  static propTypes = {
-    colors:PropTypes.arrayOf.isRequired,
-  };
+  // static propTypes = {
+  //   colors:PropTypes.arrayOf(
+  //     PropTypes.shape({
+  //       code: PropTypes.number.isRequired,
+  //       text: PropTypes.string.isRequired,
+  //     })
+  //   )
+  // };
 
   render() {
 

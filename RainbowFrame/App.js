@@ -4,12 +4,12 @@ import ReactDOM from 'react-dom';
 import RainbowFrame from './components/RainbowFrame';
 
 // let colorsArr=require('./colors.json');
-import colorsArr from './colors.json';
+import colors from './colors.json';
 
 ReactDOM.render(
-  <RainbowFrame 
-    colors={colorsArr}
-  />
+  <RainbowFrame colors={colors}>
+    Hello!
+  </RainbowFrame>
   , document.getElementById('container') 
 );
 

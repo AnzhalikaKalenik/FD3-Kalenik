@@ -425,7 +425,7 @@ module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = ["red","orange","yellow","green","#00BFFF","blue","purple"]
+module.exports = [{"text":"red","code":1},{"text":"orange","code":1},{"text":"yellow","code":1},{"text":"green","code":1},{"text":"#00BFFF","code":1},{"text":"blue","code":1},{"text":"purple","code":1}]
 
 /***/ }),
 /* 8 */
@@ -452,9 +452,11 @@ var _colors2 = _interopRequireDefault(_colors);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_RainbowFrame2.default, {
-  colors: _colors2.default
-}), document.getElementById('container'));
+_reactDom2.default.render(_react2.default.createElement(
+  _RainbowFrame2.default,
+  { colors: _colors2.default },
+  'Hello!'
+), document.getElementById('container'));
 
 // let colorsArr=require('./colors.json');
 
@@ -30550,7 +30552,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // import VotesQuestion from './VotesQuestion';
 // import VotesAnswer from './VotesAnswer';
 
-// import colorsArr from './colors.json';
+// import colors from '../colors.json';
 var colors = __webpack_require__(7);
 
 var RainbowFrame = function (_React$Component) {
@@ -30564,6 +30566,17 @@ var RainbowFrame = function (_React$Component) {
 
   _createClass(RainbowFrame, [{
     key: 'render',
+
+
+    // static propTypes = {
+    //   colors:PropTypes.arrayOf(
+    //     PropTypes.shape({
+    //       code: PropTypes.number.isRequired,
+    //       text: PropTypes.string.isRequired,
+    //     })
+    //   )
+    // };
+
     value: function render() {
 
       var curr = this.props.children;
@@ -30603,9 +30616,6 @@ var RainbowFrame = function (_React$Component) {
   return RainbowFrame;
 }(_react2.default.Component);
 
-RainbowFrame.propTypes = {
-  colors: _propTypes2.default.arrayOf.isRequired
-};
 exports.default = RainbowFrame;
 
 /***/ }),

@@ -1,1 +1,10 @@
-["red","orange", "yellow","green", "#00BFFF", "blue", "purple"]
+[
+    {"text":"red", "code":1},
+    {"text":"orange", "code":1},
+    {"text":"yellow", "code":1},
+    {"text":"green", "code":1},
+    {"text":"#00BFFF", "code":1},
+    {"text":"blue", "code":1},
+    {"text":"purple", "code":1}
+]
+   
