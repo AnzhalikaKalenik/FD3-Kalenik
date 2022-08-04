@@ -39,17 +39,17 @@ var Filter = React.createClass ({
             words=words.filter( //аргументом методу filter передаю функцию
                 // функция фильтрации  
                 filterArrayListWords = (word) =>{ //она получает слово и возвращает true если в данном слове есть подстрока из this.state.filter
-                    return (word.toString().toLowerCase().indexOf((this.state.filter)) !== -1);
+                    return (word.word.toLowerCase().indexOf((this.state.filter)) !== -1);
                 }
             )
         }    
 
         if (this.state.sort){
-            words.sort();
-        }
+            return words.sort();
+        }       
 
         this.setState({currentWords:words});
-
+    
     },
 
     render(){
