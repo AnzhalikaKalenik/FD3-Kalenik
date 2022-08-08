@@ -45,7 +45,7 @@ var Filter = React.createClass ({
         }    
 
         if (this.state.sort){
-            return words.sort();
+            words.sort();
         }       
 
         this.setState({currentWords:words});
