@@ -3,16 +3,18 @@ var Item = React.createClass ({
     displayName : 'Item',
 
     PropTypes : {
-   
-        product: React.PropTypes.string.isRequired,
-        code: React.PropTypes.number.isRequired,
-        prise: React.PropTypes.number.isRequired,
-        photo: React.PropTypes.string.isRequired,
-        balance: React.PropTypes.number.isRequired,
-        control: React.PropTypes.string.isRequired,
-        selectedItemCode: React.PropTypes.string.isRequired, //передает какой товар выделен.Cам товар зная свой код и зная выделен он или не выделен,выбирает фон строки(оранжевый или белый)
-        cbSelected: React.PropTypes.func.isRequired, //вот тут нужно от магазина получить cb (функцию selected)
-        cbDelete: React.PropTypes.func.isRequired, //передаем функцию deleteItem как cb каждому товару и каждый товар
+        
+        productInfo: React.PropTypes.shape({   
+            product: React.PropTypes.string.isRequired,
+            code: React.PropTypes.number.isRequired,
+            prise: React.PropTypes.number.isRequired,
+            photo: React.PropTypes.string.isRequired,
+            balance: React.PropTypes.number.isRequired,
+            control: React.PropTypes.string.isRequired,
+            selectedItemCode: React.PropTypes.string.isRequired, //передает какой товар выделен.Cам товар зная свой код и зная выделен он или не выделен,выбирает фон строки(оранжевый или белый)
+            cbSelected: React.PropTypes.func.isRequired, //вот тут нужно от магазина получить cb (функцию selected)
+            cbDelete: React.PropTypes.func.isRequired, //передаем функцию deleteItem как cb каждому товару
+        })
     },
 
 
@@ -42,7 +44,7 @@ var Item = React.createClass ({
     // </tr> 
 
     render: function(){
-
+        console.log(this.props.productInfo);
         if (this.props.selectedItemCode=this.props.code){
             return React.DOM.div( null,
                 React.DOM.label({className:'blockItem'},
@@ -52,26 +54,29 @@ var Item = React.createClass ({
                         name:'buttonItem',
                         onClick:this.clicked,
                     }),
-
                     React.DOM.span({
                         style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
-                    }, this.props.product),
+                    }, this.props.productInfo),
 
-                    React.DOM.span({
-                        style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
-                    }, this.props.price),
+                    // React.DOM.span({
+                    //     style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
+                    // }, this.props.product),
 
-                    React.DOM.span({
-                        style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
-                    },this.props.photo),
+                    // React.DOM.span({
+                    //     style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
+                    // }, this.props.price),
 
-                    React.DOM.span({
-                        style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
-                    },this.props.balance),
+                    // React.DOM.span({
+                    //     style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
+                    // },this.props.photo),
 
-                    React.DOM.span({
-                        style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
-                    },this.props.control),
+                    // React.DOM.span({
+                    //     style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
+                    // },this.props.balance),
+
+                    // React.DOM.span({
+                    //     style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
+                    // },this.props.control),
         
                 )
             )
@@ -81,9 +86,9 @@ var Item = React.createClass ({
            return React.DOM.div( {className:'Item'}, 
             React.DOM.span({className:'Product'},this.props.product),
             React.DOM.span({className:'Price'},this.props.price),
-            React.DOM.span({className:'Photo'},this.props.photo, React.DOM.img({src:this.props.photo})),
+            React.DOM.span({className:'Photo'}, React.DOM.img({src:this.props.photo})),
             React.DOM.span({className:'Balance'},this.props.balance),
-            React.DOM.span({className:'Control'},this.props.control, React.DOM.input({type:'button', value:this.props.control})),
+            React.DOM.span({className:'Control'}, React.DOM.input({type:'button', value:this.props.control})),
           );
         }  
     }
