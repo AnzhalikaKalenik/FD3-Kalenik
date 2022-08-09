@@ -4,17 +4,18 @@ var Item = React.createClass ({
 
     PropTypes : {
         
-        productInfo: React.PropTypes.shape({   
+        // startItemsList: React.PropTypes.shape({   
             product: React.PropTypes.string.isRequired,
             code: React.PropTypes.number.isRequired,
-            prise: React.PropTypes.number.isRequired,
+            price: React.PropTypes.number.isRequired,
             photo: React.PropTypes.string.isRequired,
             balance: React.PropTypes.number.isRequired,
             control: React.PropTypes.string.isRequired,
-            selectedItemCode: React.PropTypes.string.isRequired, //передает какой товар выделен.Cам товар зная свой код и зная выделен он или не выделен,выбирает фон строки(оранжевый или белый)
-            cbSelected: React.PropTypes.func.isRequired, //вот тут нужно от магазина получить cb (функцию selected)
-            cbDelete: React.PropTypes.func.isRequired, //передаем функцию deleteItem как cb каждому товару
-        })
+        // }),
+
+        selectedItemCode: React.PropTypes.string.isRequired, //передает какой товар выделен.Cам товар зная свой код и зная выделен он или не выделен,выбирает фон строки(оранжевый или белый)
+        cbSelected: React.PropTypes.func.isRequired, //вот тут нужно от магазина получить cb (функцию selected)
+        cbDelete: React.PropTypes.func.isRequired, //передаем функцию deleteItem как cb каждому товару
     },
 
 
@@ -27,7 +28,7 @@ var Item = React.createClass ({
 
 
     delete: function(EO){ //своя функция delete вызывает props cbDelete и передает ему this.props.code 
-        this.props.cbDelete(this.props.code); //(this.props.code);
+        this.props.cbDelete(this.props.code);
         EO.stopPropagation();     
     } ,
     //т.е. когда на товаре щелкаем удалить(button),вызывается функция delete
@@ -44,7 +45,7 @@ var Item = React.createClass ({
     // </tr> 
 
     render: function(){
-        console.log(this.props.productInfo);
+        
         if (this.props.selectedItemCode=this.props.code){
             return React.DOM.div( null,
                 React.DOM.label({className:'blockItem'},
@@ -54,29 +55,29 @@ var Item = React.createClass ({
                         name:'buttonItem',
                         onClick:this.clicked,
                     }),
+                    // React.DOM.span({
+                    //     style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
+                    // }, this.props.startItemsList),
+                    
                     React.DOM.span({
                         style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
-                    }, this.props.productInfo),
+                    }, this.props.product),
+                    
+                    React.DOM.span({
+                        style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
+                    }, this.props.price),
 
-                    // React.DOM.span({
-                    //     style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
-                    // }, this.props.product),
+                    React.DOM.span({
+                        style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
+                    },this.props.photo),
 
-                    // React.DOM.span({
-                    //     style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
-                    // }, this.props.price),
+                    React.DOM.span({
+                        style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
+                    },this.props.balance),
 
-                    // React.DOM.span({
-                    //     style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
-                    // },this.props.photo),
-
-                    // React.DOM.span({
-                    //     style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
-                    // },this.props.balance),
-
-                    // React.DOM.span({
-                    //     style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
-                    // },this.props.control),
+                    React.DOM.span({
+                        style:{color:(this.props.selectedItemCode==this.props.code)?'orange':'black'}
+                    },this.props.control),
         
                 )
             )
