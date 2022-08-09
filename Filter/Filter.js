@@ -45,10 +45,15 @@ var Filter = React.createClass ({
         }    
 
         if (this.state.sort){
-            words.sort();
+            function SortArray(x, y){
+            return x.word.localeCompare(y.word);
+        }
+            var s = words.sort(SortArray);
+            console.log(s);
         }       
 
         this.setState({currentWords:words});
+
     
     },
 
