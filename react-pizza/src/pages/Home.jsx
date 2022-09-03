@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useSelector, useDispatch  } from 'react-redux';
 
 import { setCategoryId } from '../redux/slices/filterSlice';
@@ -20,24 +20,24 @@ const Home = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const onChangeCategory = (id) => {
-    dispatch (setCategoryId(id));
+    dispatch(setCategoryId(id));
   };
   
   React.useEffect(() => {
     setIsLoading(true); //чтобы отображался скелетон не только при первом рендере,но и при дальнейшем выборе категорий пицц
 
-    const search = searchValue ? `&search=${searchValue}` : '';
+    // const sortBY = sortType.sortProperty.replace('-', ''); //1
+    // const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';//1
+    // const category = categoryId > 0 ? `category=${categoryId}` : '';//1
+    // const search = searchValue ? `&search=${searchValue}` : '';
 
-    // const sortBY = sortType.sortProperty.replace('-', '');
-    // const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
-    // const category = categoryId > 0 ? `category=${categoryId}` : '';
-
-    // fetch(`https://6304dbc894b8c58fd726c315.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`)
+    // fetch(`https://6304dbc894b8c58fd726c315.mockapi.io/items?${category}&sortBy=${sortBY}&order=${order}${search}`)
 
     fetch(`https://6304dbc894b8c58fd726c315.mockapi.io/items?page=${currentPage}&limit=4&${
       categoryId > 0 ? `category=${categoryId}` : '' //если категория >0 то передаем category, если =0 то передаем ''
     }&sortBy=${sortType.sortProperty}&order=desc 
-    ${search}`, //когда передаем все пиццы чтобы не передавалась категория указано выше ${search}
+    &search=${searchValue ? `&search=${searchValue}` : ''}`, 
+    //когда передаем все пиццы чтобы не передавалась категория указано выше &search
     )
       .then((res) => {
         return res.json();
