@@ -11,6 +11,7 @@ import { SearchContext } from '../App';
 
 const Home = () => {
   const dispatch = useDispatch();
+  //console.log(dispatch)
   const categoryId = useSelector((state) => state.filter.categoryId);
   const sortType = useSelector((state) => state.filter.sort.sortProperty);
 
@@ -20,6 +21,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const onChangeCategory = (id) => {
+    console.log(id);
     dispatch(setCategoryId(id));
   };
   
@@ -36,7 +38,7 @@ const Home = () => {
     fetch(`https://6304dbc894b8c58fd726c315.mockapi.io/items?page=${currentPage}&limit=4&${
       categoryId > 0 ? `category=${categoryId}` : '' //если категория >0 то передаем category, если =0 то передаем ''
     }&sortBy=${sortType.sortProperty}&order=desc 
-    &search=${searchValue ? `&search=${searchValue}` : ''}`, 
+    &search=${searchValue ? `&search=${searchValue}` : ''}`
     //когда передаем все пиццы чтобы не передавалась категория указано выше &search
     )
       .then((res) => {
@@ -50,6 +52,8 @@ const Home = () => {
   }, [categoryId, sortType, searchValue, currentPage]); //useEffect следи за переменными categoryId и sortType,и если они поменяются делай запрос на backend,и тогда backend ввернет новые пиццы
   
   const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj}/>);
+  //Array.isArray(items) && items.map((obj) => <PizzaBlock key={obj.id} {...obj}/>);
+  
     // .filter(obj => {
     //   if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
     //     return true;

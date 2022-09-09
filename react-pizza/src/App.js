@@ -1,5 +1,5 @@
 import React from 'react';
-
+ 
 import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
@@ -18,13 +18,6 @@ function App() {
   return (
     //SearchContext не компонент,компонент это Provider
     <div className="wrapper">
-      {/* <button aria-label="Increment value" onClick={() => dispatch(increment())}>
-        Increment
-      </button>
-      <span>{count}</span>
-      <button aria-label="Decrement value" onClick={() => dispatch(decrement())}>
-        Decrement
-      </button> */}
 
       <SearchContext.Provider value={{searchValue, setSearchValue}}> 
         <Header/>
