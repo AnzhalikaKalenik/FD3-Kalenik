@@ -41,6 +41,7 @@ const Home = () => {
     &search=${searchValue ? `&search=${searchValue}` : ''}`
     //когда передаем все пиццы чтобы не передавалась категория указано выше &search
     )
+
       .then((res) => {
         return res.json();
       })
