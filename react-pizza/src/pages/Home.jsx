@@ -13,7 +13,7 @@ const Home = () => {
   const dispatch = useDispatch();
   //console.log(dispatch)
   const categoryId = useSelector((state) => state.filter.categoryId);
-  const sortType = useSelector((state) => state.filter.sort.sortProperty);
+  const sortType = useSelector((state) => state.filter.sort);
 
   const {searchValue} = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
@@ -28,17 +28,17 @@ const Home = () => {
   React.useEffect(() => {
     setIsLoading(true); //чтобы отображался скелетон не только при первом рендере,но и при дальнейшем выборе категорий пицц
 
-    // const sortBY = sortType.sortProperty.replace('-', ''); //1
+    // const sortBy = sortType.sortProperty.replace('-', ''); //1
     // const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';//1
     // const category = categoryId > 0 ? `category=${categoryId}` : '';//1
-    // const search = searchValue ? `&search=${searchValue}` : '';
+    // const search = searchValue ? `search=${searchValue}` : '';//1
 
-    // fetch(`https://6304dbc894b8c58fd726c315.mockapi.io/items?${category}&sortBy=${sortBY}&order=${order}${search}`)
+    // fetch(`https://6304dbc894b8c58fd726c315.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}&search=${search}`)
 
     fetch(`https://6304dbc894b8c58fd726c315.mockapi.io/items?page=${currentPage}&limit=4&${
       categoryId > 0 ? `category=${categoryId}` : '' //если категория >0 то передаем category, если =0 то передаем ''
     }&sortBy=${sortType.sortProperty}&order=desc 
-    &search=${searchValue ? `&search=${searchValue}` : ''}`
+    &search=${searchValue ? `search=${searchValue}` : ''}`
     //когда передаем все пиццы чтобы не передавалась категория указано выше &search
     )
 

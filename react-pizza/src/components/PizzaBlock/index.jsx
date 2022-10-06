@@ -20,7 +20,7 @@ function PizzaBlock({ title, price, imageUrl, sizes, types }) { //диструк
         <h4 className="pizza-block__title">{title}</h4>
         <div className="pizza-block__selector">
           <ul>
-            {types?.map((typeId) => ( //рендерим типы пиц(рендер списка), делаем проверку не по i, а по typeId тк там по сути и хранится индекс 0 или 1
+            {types.map((typeId) => ( //рендерим типы пиц(рендер списка), делаем проверку не по i, а по typeId тк там по сути и хранится индекс 0 или 1
               <li 
                 key={typeId}
                 onClick={() => setActiveType(typeId)}
@@ -30,7 +30,7 @@ function PizzaBlock({ title, price, imageUrl, sizes, types }) { //диструк
             ))}
           </ul>
           <ul>
-            {sizes?.map((size, i) => ( //рендкрим размеры пицц, (рендер списка)
+            {sizes.map((size, i) => ( //рендкрим размеры пицц, (рендер списка)
               <li 
                 key={size}
                 onClick={() => setActiveSize(i)}
