@@ -1,4 +1,5 @@
 import React from 'react';
+// import axios from 'axios';
 import { useSelector, useDispatch  } from 'react-redux';
 
 import { setCategoryId } from '../redux/slices/filterSlice';
@@ -14,6 +15,7 @@ const Home = () => {
   //console.log(dispatch)
   const categoryId = useSelector((state) => state.filter.categoryId);
   const sortType = useSelector((state) => state.filter.sort);
+  //const {categoryId, sort} = useSelector((state) => state.filter);
 
   const {searchValue} = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
@@ -27,33 +29,45 @@ const Home = () => {
   
   React.useEffect(() => {
     setIsLoading(true); //чтобы отображался скелетон не только при первом рендере,но и при дальнейшем выборе категорий пицц
-
-    // const sortBy = sortType.sortProperty.replace('-', ''); //1
-    // const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';//1
-    // const category = categoryId > 0 ? `category=${categoryId}` : '';//1
-    // const search = searchValue ? `search=${searchValue}` : '';//1
-
+    //1
+    // const sortBy = sortType.sortProperty.replace('-', ''); 
+    // const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
+    // const category = categoryId > 0 ? `category=${categoryId}` : '';
+    // const search = searchValue ? `search=${searchValue}` : '';
     // fetch(`https://6304dbc894b8c58fd726c315.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}&search=${search}`)
 
-    fetch(`https://6304dbc894b8c58fd726c315.mockapi.io/items?page=${currentPage}&limit=4&${
+    //2
+    fetch(`https://6304dbc894b8c58fd726c315.mockapi.io/items?page=${currentPage}&limit=4&${ 
       categoryId > 0 ? `category=${categoryId}` : '' //если категория >0 то передаем category, если =0 то передаем ''
     }&sortBy=${sortType.sortProperty}&order=desc 
     &search=${searchValue ? `search=${searchValue}` : ''}`
     //когда передаем все пиццы чтобы не передавалась категория указано выше &search
     )
 
-      .then((res) => {
-        return res.json();
-      })
-      .then((arr) => {
-        setItems(arr);
-        setIsLoading(false);
-      });
-      window.scrollTo(0, 0); //чтобы scrol подымался на самый верх при возврате назад
+    .then((res) => {
+      return res.json();
+    })
+    .then((arr) => {
+      setItems(arr);
+      setIsLoading(false);
+    });
+
+    // axios
+    //   .get(`https://6304dbc894b8c58fd726c315.mockapi.io/items?page=${currentPage}&limit=4&
+    //     ${categoryId > 0 ? `category=${categoryId}` : ''}
+    //     &sortBy=${sortType.sortProperty}&order=desc 
+    //     &search=${searchValue ? `search=${searchValue}` : ''}`
+    //   )
+
+    //   .then((res) => {
+    //     setItems(res.data);
+    //     setIsLoading(false);
+    //   });  
+
+    window.scrollTo(0, 0); //чтобы scrol подымался на самый верх при возврате назад
   }, [categoryId, sortType, searchValue, currentPage]); //useEffect следи за переменными categoryId и sortType,и если они поменяются делай запрос на backend,и тогда backend ввернет новые пиццы
   
   const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj}/>);
-  //Array.isArray(items) && items.map((obj) => <PizzaBlock key={obj.id} {...obj}/>);
   
     // .filter(obj => {
     //   if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
